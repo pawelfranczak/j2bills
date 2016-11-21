@@ -25,7 +25,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	            .and()
 	        .formLogin()                      
 	            .and()
-	        .httpBasic();       
+	        .httpBasic().and()
+	        	.logout()
+	        		.logoutUrl("/logout")
+	        		.logoutSuccessUrl("/index")
+	        		.invalidateHttpSession(true);       
+	    
 	}
 
 	@Override
