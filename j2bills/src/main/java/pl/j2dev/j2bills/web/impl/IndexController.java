@@ -13,8 +13,8 @@ public class IndexController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String index() {
 		
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		System.out.println("ZALOGOWANY JAKO " + authentication.getName());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("ZALOGOWANY JAKO " + authentication.getName());
 		
 		return "index";
 	}
