@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,22 +23,22 @@ public class Users {
 	@Column(name = "enbled")
 	boolean enabled;
 	
-	@OneToMany(mappedBy = "users")
-	private Collection<Person> persons;
+//	@OneToMany(mappedBy = "users")
+//	private Collection<Person> persons;
 
-	@OneToMany(mappedBy = "users")
+	@OneToMany(targetEntity = Account.class)
 	private Collection<Account> accounts;
-	
-	@OneToMany(mappedBy = "users")
-	private Collection<Journal> journals;
-	
-	public void setJournals(Collection<Journal> journals) {
-		this.journals = journals;
-	}
-	
-	public Collection<Journal> getJournals() {
-		return journals;
-	}
+//	
+//	@OneToMany(mappedBy = "users")
+//	private Collection<Journal> journals;
+//	
+//	public void setJournals(Collection<Journal> journals) {
+//		this.journals = journals;
+//	}
+//	
+//	public Collection<Journal> getJournals() {
+//		return journals;
+//	}
 	
 	public String getUsername() {
 		return username;
@@ -63,14 +64,14 @@ public class Users {
 		this.enabled = enabled;
 	}
 	
-	public Collection<Person> getPersons() {
-		return persons;
-	}
-	
-	public void setPersons(Collection<Person> persons) {
-		this.persons = persons;
-	}
-	
+//	public Collection<Person> getPersons() {
+//		return persons;
+//	}
+//	
+//	public void setPersons(Collection<Person> persons) {
+//		this.persons = persons;
+//	}
+//	
 	public Collection<Account> getAccounts() {
 		return accounts;
 	}
