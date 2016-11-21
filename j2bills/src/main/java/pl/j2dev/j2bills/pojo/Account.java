@@ -1,50 +1,28 @@
 package pl.j2dev.j2bills.pojo;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "account")
 public class Account {
 
-	@Id
-	@GeneratedValue
 	int id;
-	
-	@ManyToOne(targetEntity = Users.class)	
-	@JoinColumn(name = "fk_account_username")
 	Users users;
-	
-	@Column(name = "accountname")
 	String accountName;
-	
-	@Column(name = "description")
 	String description;
-	
-	@Column(name = "balance")
 	BigDecimal balance;
 	
-//	@OneToMany(mappedBy = "account")
-//	private Collection<Journal> journals;
-	
-//	public void setJournals(Collection<Journal> journals) {
-//		this.journals = journals;
-//	}
-//	
-//	public Collection<Journal> getJournals() {
-//		return journals;
-//	}
-
+	@Id
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -53,6 +31,8 @@ public class Account {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "username")
 	public Users getUsers() {
 		return users;
 	}
@@ -61,6 +41,7 @@ public class Account {
 		this.users = users;
 	}
 
+	@Column(name = "accountname")
 	public String getAccountName() {
 		return accountName;
 	}
@@ -69,6 +50,7 @@ public class Account {
 		this.accountName = accountName;
 	}
 
+	@Column(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -77,6 +59,7 @@ public class Account {
 		this.description = description;
 	}
 
+	@Column(name = "balance")
 	public BigDecimal getBalance() {
 		return balance;
 	}
@@ -84,5 +67,24 @@ public class Account {
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Account [id=");
+		builder.append(id);
+		builder.append(", users=");
+		builder.append(users);
+		builder.append(", accountName=");
+		builder.append(accountName);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", balance=");
+		builder.append(balance);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 	
 }

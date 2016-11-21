@@ -1,11 +1,12 @@
 package pl.j2dev.j2bills.pojo;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -13,33 +14,15 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class Users {
 
+	String username;
+	String password;
+	boolean enabled;
+
+	private Set<Account> account = new HashSet<Account>(0);	
+	
+
 	@Id
 	@Column(name = "username")
-	String username;
-	
-	@Column(name = "password")
-	String password;
-	
-	@Column(name = "enbled")
-	boolean enabled;
-	
-//	@OneToMany(mappedBy = "users")
-//	private Collection<Person> persons;
-
-	@OneToMany(targetEntity = Account.class)
-	private Collection<Account> accounts;
-//	
-//	@OneToMany(mappedBy = "users")
-//	private Collection<Journal> journals;
-//	
-//	public void setJournals(Collection<Journal> journals) {
-//		this.journals = journals;
-//	}
-//	
-//	public Collection<Journal> getJournals() {
-//		return journals;
-//	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -48,6 +31,7 @@ public class Users {
 		this.username = username;
 	}
 
+	@Column(name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -56,6 +40,7 @@ public class Users {
 		this.password = password;
 	}
 
+	@Column(name = "enabled")	
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -63,21 +48,29 @@ public class Users {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-//	public Collection<Person> getPersons() {
-//		return persons;
-//	}
-//	
-//	public void setPersons(Collection<Person> persons) {
-//		this.persons = persons;
-//	}
-//	
-	public Collection<Account> getAccounts() {
-		return accounts;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<Account> getAccount() {
+		return account;
+	}
+
+	public void setAccount(Set<Account> account) {
+		this.account = account;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Users [username=");
+		builder.append(username);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append("]");
+		return builder.toString();
 	}
 	
-	public void setAccounts(Collection<Account> accounts) {
-		this.accounts = accounts;
-	}
+	
 	
 }

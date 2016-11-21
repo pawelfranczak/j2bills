@@ -3,12 +3,10 @@ package pl.j2dev.j2bills.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
 import pl.j2dev.j2bills.pojo.Account;
-import pl.j2dev.j2bills.pojo.Currency;
 
 @Repository
 public class AccountDaoImpl extends DaoAbstractImpl<Account> {
@@ -32,11 +30,8 @@ public class AccountDaoImpl extends DaoAbstractImpl<Account> {
 
 	@Override
 	public List<Account> getOjects() {
-		@SuppressWarnings("unchecked")
-		
-		List<Account> list = currentSession().createCriteria(Account.class)
-			.list();
-		
+		@SuppressWarnings("unchecked")		
+		List<Account> list = currentSession().createCriteria(Account.class).list();
 		return list;
 	}
 

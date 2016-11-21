@@ -25,12 +25,12 @@
 <body>
 
 
-	<h1>Konta</h1>
+	<h1><fmt:message key="account" /></h1>
 
 	<table width="100%" border="1">
 		<tr>
 			<th><fmt:message key="field.id" /></th>
-			<th><fmt:message key="person" /></th>
+			<th><fmt:message key="user" /></th>
 			<th><fmt:message key="field.name" /></th>
 			<th><fmt:message key="field.description" /></th>
 			<th><fmt:message key="account.field.balance" /></th>
@@ -38,8 +38,8 @@
 		<c:forEach items="${accountList}" var="account">
 			<tr>
 				<td><c:out value="${account.id}"/></td>
-				<td><c:out value="${account.person}"/></td>
-				<td><c:out value="${account.name}"/></td>
+				<td><c:out value="${account.users.username}"/></td>
+				<td><c:out value="${account.accountName}"/></td>
 				<td><c:out value="${account.description}"/></td>
 				<td><c:out value="${account.balance}"/></td>
 			</tr>
