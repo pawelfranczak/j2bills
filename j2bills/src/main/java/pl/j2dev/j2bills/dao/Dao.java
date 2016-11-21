@@ -2,7 +2,6 @@ package pl.j2dev.j2bills.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 
