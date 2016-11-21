@@ -21,4 +21,9 @@ public class IndexController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String logout() {
+		return "logout";
+	}
+	
 }
