@@ -2,8 +2,10 @@ package pl.j2dev.j2bills.config;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.chainsaw.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,7 +37,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		.usersByUsernameQuery(
 			"select username,password, enabled from users where username=?")
 		.authoritiesByUsernameQuery(
-			"select username, role from user_roles where username=?");
+			"select username, role from user_roles where username=?")
+		.passwordEncoder(new ShaPasswordEncoder(256));
 		
 	}
 	
