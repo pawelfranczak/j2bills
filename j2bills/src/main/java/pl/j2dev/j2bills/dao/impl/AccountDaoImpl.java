@@ -1,8 +1,14 @@
 package pl.j2dev.j2bills.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
@@ -30,8 +36,18 @@ public class AccountDaoImpl extends DaoAbstractImpl<Account> {
 
 	@Override
 	public List<Account> getOjects() {
-		@SuppressWarnings("unchecked")		
-		List<Account> list = currentSession().createCriteria(Account.class).list();
+		if (securityContext() == null)
+			return new ArrayList<Account>();
+		
+		Authentication authentication = securityContext().getAuthentication();
+		String user = authentication.getName();
+
+		Criteria criterion = currentSession().createCriteria(Account.class);
+		criterion.add(Restrictions.eq("users.username", user));
+		
+		@SuppressWarnings("unchecked")
+		List<Account> list = criterion.list();
+		
 		return list;
 	}
 

@@ -7,9 +7,15 @@ import javax.inject.Inject;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public abstract class DaoAbstractImpl<T> implements Dao<T> {
 
+	protected SessionFactory sessionFactory;
+	
 	@Inject
 	public DaoAbstractImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -30,8 +36,6 @@ public abstract class DaoAbstractImpl<T> implements Dao<T> {
 	@Override
 	public abstract boolean update(T object);
 
-	protected SessionFactory sessionFactory;
-	
 	@Override
 	public Session currentSession() {
 		Session session = null;
@@ -42,5 +46,12 @@ public abstract class DaoAbstractImpl<T> implements Dao<T> {
 		}
 		return session;
 	}
+	
+	@Override
+	public SecurityContext securityContext() {
+		return SecurityContextHolder.getContext();
+	}
+	
+	
 
 }
