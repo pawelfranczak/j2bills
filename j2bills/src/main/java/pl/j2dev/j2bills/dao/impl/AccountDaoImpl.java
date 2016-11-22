@@ -20,7 +20,6 @@ public class AccountDaoImpl extends DaoAbstractImpl<Account> {
 
 	public AccountDaoImpl(SessionFactory sessionFactory) {
 		super(sessionFactory);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
