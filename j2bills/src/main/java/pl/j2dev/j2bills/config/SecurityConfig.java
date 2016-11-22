@@ -16,7 +16,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	    http
@@ -25,9 +24,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	            .and()
 	        .formLogin()                      
 	            .and()
-	        .httpBasic().and()
-	        	.logout()
-	        		.logoutSuccessUrl("/index");
+	        .httpBasic();
 	    
 	}
 
