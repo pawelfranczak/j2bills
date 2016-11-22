@@ -2,7 +2,6 @@ package pl.j2dev.j2bills.config;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.chainsaw.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
