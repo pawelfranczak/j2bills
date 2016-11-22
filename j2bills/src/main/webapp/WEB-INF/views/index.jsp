@@ -32,7 +32,7 @@
 	<h1><fmt:message key="index.welcome" /></h1>
 	<h2>Zalogowany <security:authentication property="principal.username" /></h2>
 	
-	<a href="<c:url value="logout" />">Logout</a><BR><BR>
+	<a href="<c:url value="login?logout" />">Logout</a><BR><BR>
 	
 	<fmt:message key="account" />: 
 	<a href="<c:url value="account/addForm" />"> <fmt:message key="index.add" /> </a> |
