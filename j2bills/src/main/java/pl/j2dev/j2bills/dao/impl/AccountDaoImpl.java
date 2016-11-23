@@ -35,12 +35,10 @@ public class AccountDaoImpl extends DaoAbstractImpl<Account> {
 
 	@Override
 	public List<Account> getOjects() {
-		if (securityContext() == null)
+		String user = username();
+		if (user == null)
 			return new ArrayList<Account>();
 		
-		Authentication authentication = securityContext().getAuthentication();
-		String user = authentication.getName();
-
 		Criteria criterion = currentSession().createCriteria(Account.class);
 		criterion.add(Restrictions.eq("users.username", user));
 		
@@ -52,15 +50,12 @@ public class AccountDaoImpl extends DaoAbstractImpl<Account> {
 
 	@Override
 	public int save(Account object) {
-		if (securityContext() == null)
+		Users user = getLoggedUser();
+		if (user == null)
 			return 0;
-		Authentication authentication = securityContext().getAuthentication();
-		String user = authentication.getName();
 		
 		object.setBalance(BigDecimal.ZERO);
-		object.setUsers( (Users)currentSession().load(Users.class, user));
-		
-		System.out.println("NEW USER " + object);
+		object.setUsers( user );
 		
 		Serializable id = currentSession().save(object);
 		return (int) id;

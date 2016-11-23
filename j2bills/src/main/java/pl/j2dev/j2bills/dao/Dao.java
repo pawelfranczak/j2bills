@@ -3,7 +3,10 @@ package pl.j2dev.j2bills.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
+
+import pl.j2dev.j2bills.pojo.Users;
 
 
 
@@ -58,8 +61,23 @@ public interface Dao<T> {
 	
 	/**
 	 * @return current spring security context if exist, else null
-	 * @return
 	 */
 	SecurityContext securityContext();
+	
+	/**
+	 * @return current authentication from security context
+	 */
+	Authentication authentication();
+	
+	/**
+	 * @return actual logged username
+	 */
+	String username();
+	
+	/**
+	 * @return reference to Users object with actual logged user
+	 */
+	Users getLoggedUser();
+	
 	
 }
