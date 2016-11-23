@@ -1,13 +1,12 @@
 package pl.j2dev.j2bills.pojo;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -15,30 +14,13 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class Person {
 
+	int id;
+	String firstName;
+	String lastName;
+	Users users;
+
 	@Id
 	@GeneratedValue
-	int id;
-	
-	@Column(name = "firstname")
-	String firstName;
-	
-	@Column(name = "lastname")
-	String lastName;
-	
-	@ManyToOne
-	Users users;
-	
-	@OneToMany(mappedBy = "person")
-	private Collection<Journal> journals;
-	
-	public void setJournals(Collection<Journal> journals) {
-		this.journals = journals;
-	}
-	
-	public Collection<Journal> getJournals() {
-		return journals;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -47,6 +29,7 @@ public class Person {
 		this.id = id;
 	}
 
+	@Column(name = "firstname")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -55,6 +38,7 @@ public class Person {
 		this.firstName = firstName;
 	}
 
+	@Column(name = "lastname")
 	public String getLastName() {
 		return lastName;
 	}
@@ -63,6 +47,8 @@ public class Person {
 		this.lastName = lastName;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "username")
 	public Users getUsers() {
 		return users;
 	}
@@ -70,6 +56,10 @@ public class Person {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
+	
+	
+	
+
 	
 	
 	

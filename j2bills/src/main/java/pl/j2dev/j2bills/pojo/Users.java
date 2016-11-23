@@ -19,7 +19,7 @@ public class Users {
 	boolean enabled;
 
 	private Set<Account> account = new HashSet<Account>(0);	
-	
+	private Set<Person> person = new HashSet<Person>(0);	
 
 	@Id
 	@Column(name = "username")
@@ -57,6 +57,17 @@ public class Users {
 	public void setAccount(Set<Account> account) {
 		this.account = account;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<Person> getPerson() {
+		return person;
+	}
+	
+	public void setPerson(Set<Person> person) {
+		this.person = person;
+	}
+
+	
 
 	@Override
 	public String toString() {
