@@ -46,7 +46,7 @@ public class Journal {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "person_id")
 	public Person getPerson() {
 		return person;
 	}
@@ -56,7 +56,7 @@ public class Journal {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "account_id")
 	public Account getAccount() {
 		return account;
 	}
@@ -66,7 +66,7 @@ public class Journal {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "currency_id")
 	public Currency getCurrency() {
 		return currency;
 	}
