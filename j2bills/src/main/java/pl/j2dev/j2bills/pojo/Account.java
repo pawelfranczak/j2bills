@@ -1,6 +1,8 @@
 package pl.j2dev.j2bills.pojo;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,8 @@ public class Account {
 	String accountName;
 	String description;
 	BigDecimal balance;
+	
+	private Set<Journal> journal = new HashSet<Journal>(0);
 	
 	@Id
 	@GeneratedValue
@@ -66,6 +71,15 @@ public class Account {
 
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<Journal> getJournal() {
+		return journal;
+	}
+	
+	public void setJournal(Set<Journal> journal) {
+		this.journal = journal;
 	}
 
 	@Override

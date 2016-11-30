@@ -20,6 +20,9 @@ public class Users {
 
 	private Set<Account> account = new HashSet<Account>(0);	
 	private Set<Person> person = new HashSet<Person>(0);	
+	
+	private Set<Journal> journal = new HashSet<Journal>(0);	
+	
 
 	@Id
 	@Column(name = "username")
@@ -65,6 +68,15 @@ public class Users {
 	
 	public void setPerson(Set<Person> person) {
 		this.person = person;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<Journal> getJournal() {
+		return journal;
+	}
+	
+	public void setJournal(Set<Journal> journal) {
+		this.journal = journal;
 	}
 
 	

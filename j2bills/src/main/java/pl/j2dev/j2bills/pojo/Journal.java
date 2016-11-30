@@ -5,8 +5,10 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,31 +16,17 @@ import javax.persistence.Table;
 @Table(name = "journal")
 public class Journal {
 
+	int id;
+	Users users;
+	Person person;
+	Account account;
+	Currency currency;
+	BigDecimal value;
+	String description;
+	Timestamp timestamp;
+
 	@Id
 	@GeneratedValue
-	int id;
-	
-	@ManyToOne
-	Users users;
-	
-	@ManyToOne
-	Person person;
-	
-	@ManyToOne
-	Account account;
-	
-	@ManyToOne
-	Currency currency;
-	
-	@Column(name = "value")
-	BigDecimal value;
-	
-	@Column(name = "description")
-	String description;
-	
-	@Column(name = "datetime")
-	Timestamp dateTime;
-
 	public int getId() {
 		return id;
 	}
@@ -47,6 +35,8 @@ public class Journal {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "username")
 	public Users getUsers() {
 		return users;
 	}
@@ -55,6 +45,8 @@ public class Journal {
 		this.users = users;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	public Person getPerson() {
 		return person;
 	}
@@ -63,6 +55,8 @@ public class Journal {
 		this.person = person;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	public Account getAccount() {
 		return account;
 	}
@@ -71,6 +65,8 @@ public class Journal {
 		this.account = account;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	public Currency getCurrency() {
 		return currency;
 	}
@@ -79,6 +75,7 @@ public class Journal {
 		this.currency = currency;
 	}
 
+	@Column(name = "value")
 	public BigDecimal getValue() {
 		return value;
 	}
@@ -87,6 +84,7 @@ public class Journal {
 		this.value = value;
 	}
 
+	@Column(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -95,12 +93,13 @@ public class Journal {
 		this.description = description;
 	}
 
-	public Timestamp getDateTime() {
-		return dateTime;
+	@Column(name = "timestamp")
+	public Timestamp getTimestamp() {
+		return timestamp;
 	}
 
-	public void setDateTime(Timestamp dateTime) {
-		this.dateTime = dateTime;
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 	
