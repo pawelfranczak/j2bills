@@ -2,7 +2,6 @@ package pl.j2dev.j2bills.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 
@@ -53,12 +52,7 @@ public interface Dao<T> {
 	 * @return true if updating success, false if failed
 	 */
 	boolean update(T object);
-	
-	/**
-	 * @return current hibernate session
-	 */
-	Session currentSession();
-	
+
 	/**
 	 * @return current spring security context if exist, else null
 	 */

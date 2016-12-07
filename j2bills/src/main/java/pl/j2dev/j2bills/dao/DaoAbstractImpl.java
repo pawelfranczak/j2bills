@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -38,17 +36,6 @@ public abstract class DaoAbstractImpl<T> implements Dao<T> {
 	public abstract boolean update(T object);
 
 	@Override
-	public Session currentSession() {
-		Session session = null;
-		try {
-			session = sessionFactory.getCurrentSession();
-		} catch (HibernateException e) {
-			session = sessionFactory.openSession();
-		}
-		return session;
-	}
-
-	@Override
 	public SecurityContext securityContext() {
 		return SecurityContextHolder.getContext();
 	}
@@ -73,7 +60,7 @@ public abstract class DaoAbstractImpl<T> implements Dao<T> {
 	public Users getLoggedUser() {
 		String username = username();
 		if (username != null) {
-			return (Users) currentSession().get(Users.class, username);
+			return (Users) null;
 		}
 		return null;
 	}
