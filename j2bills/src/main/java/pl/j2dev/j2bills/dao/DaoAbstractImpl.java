@@ -2,9 +2,8 @@ package pl.j2dev.j2bills.dao;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,18 +12,11 @@ import pl.j2dev.j2bills.pojo.Users;
 
 public abstract class DaoAbstractImpl<T> implements Dao<T> {
 
-	protected SessionFactory sessionFactory;
-
-	@Inject
-	public DaoAbstractImpl(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
+	@Autowired
+	public JdbcOperations jdbc;
+	
 	@Override
 	public abstract T getOjectById(int id);
-
-	@Override
-	public abstract T getObjectByKey(String key);
 
 	@Override
 	public abstract List<T> getOjects();

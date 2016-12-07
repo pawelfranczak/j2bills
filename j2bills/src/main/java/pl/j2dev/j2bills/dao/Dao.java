@@ -2,6 +2,7 @@ package pl.j2dev.j2bills.dao;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 
@@ -26,14 +27,7 @@ public interface Dao<T> {
 	 */
 
 	public T getOjectById(int id);
-	
-	/**
-	 * Search in database for object of {@link T} type using field key.
-	 * @param key of object in database which could be returned<BR>can't be null
-	 * @return filled object {@link T} if found, else null
-	 */
-	T getObjectByKey(String key);
-	
+
 	/**
 	 * @return every object of {@link T} type from database
 	 */
