@@ -1,21 +1,7 @@
 package pl.j2dev.j2bills.pojo;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "account")
 public class Account {
 
 	int id;
@@ -24,10 +10,6 @@ public class Account {
 	String description;
 	BigDecimal balance;
 	
-	private Set<Journal> journal = new HashSet<Journal>(0);
-	
-	@Id
-	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -36,8 +18,6 @@ public class Account {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "username")
 	public Users getUsers() {
 		return users;
 	}
@@ -46,7 +26,6 @@ public class Account {
 		this.users = users;
 	}
 
-	@Column(name = "accountname")
 	public String getAccountName() {
 		return accountName;
 	}
@@ -55,7 +34,6 @@ public class Account {
 		this.accountName = accountName;
 	}
 
-	@Column(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -64,7 +42,6 @@ public class Account {
 		this.description = description;
 	}
 
-	@Column(name = "balance")
 	public BigDecimal getBalance() {
 		return balance;
 	}
@@ -72,33 +49,5 @@ public class Account {
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-	public Set<Journal> getJournal() {
-		return journal;
-	}
-	
-	public void setJournal(Set<Journal> journal) {
-		this.journal = journal;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Account [id=");
-		builder.append(id);
-		builder.append(", users=");
-		builder.append(users);
-		builder.append(", accountName=");
-		builder.append(accountName);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", balance=");
-		builder.append(balance);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
 	
 }
