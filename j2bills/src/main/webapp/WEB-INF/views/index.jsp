@@ -50,9 +50,9 @@
 	<a href="<c:url value="person/select" />"> <fmt:message key="index.select" /> </a> | <BR>
 
 	<fmt:message key="journal.entry" />: 
-	<a href="<c:url value="journalentry/addFormExtended" />"> <fmt:message key="index.add" /> </a> |
-	<a href="<c:url value="journalentry/show" />"> <fmt:message key="index.show" /> </a> |
-	<a href="<c:url value="journalentry/select" />"> <fmt:message key="index.select" /> </a> | <BR>
+	<a href="<c:url value="journal/addFormExtended" />"> <fmt:message key="index.add" /> </a> |
+	<a href="<c:url value="journal/show" />"> <fmt:message key="index.show" /> </a> |
+	<a href="<c:url value="journal/select" />"> <fmt:message key="index.select" /> </a> | <BR>
 
 </body>
 </html>
