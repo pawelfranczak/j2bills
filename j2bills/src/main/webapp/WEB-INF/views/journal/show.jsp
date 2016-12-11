@@ -1,0 +1,58 @@
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page isELIgnored="false"%>
+
+<!-- jstl core -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!--  spring jsp forms tags -->
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<!-- i18l tags  -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+
+<!-- set locale! -->
+<fmt:setLocale value="${language}" />
+
+<!-- properties file -->
+<fmt:setBundle basename="text" />
+
+<html lang="${language}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>j2bills</title>
+</head>
+<body>
+
+
+	<h1><fmt:message key="journal.entry" /></h1>
+	<table width="100%" border="1">
+		<tr>
+			<th><fmt:message key="field.id" /></th>
+			<th><fmt:message key="user" /></th>
+			<th>OSOBA</th>
+			<th>KONTO</th>
+			<th>WALUTA</th>
+			<th>WARTOSC</th>
+			<th>OPIS</th>
+			<th>TIMESTAMP</th>
+		</tr>
+		<c:forEach items="${journalList}" var="journal">
+			<tr>
+				<td><c:out value="${journal.id}"/></td>
+				<td><c:out value="${journal.users.username}"/></td>
+				<td><c:out value="${journal.person.firstName} ${journal.person.lastName}"/></td>
+				<td><c:out value="${journal.account.accountName}"/></td>
+				<td><c:out value="${journal.currency.iso4217}"/></td>
+				<td><c:out value="${journal.value}"/></td>
+				<td><c:out value="${journal.description}"/></td>
+				<td><c:out value="${journal.timestamp}"/></td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	
+	<BR> <a href="<c:url value="/" />"> | index | </a>
+
+</body>
+</html>
