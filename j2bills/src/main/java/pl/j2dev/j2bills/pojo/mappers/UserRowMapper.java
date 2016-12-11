@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import pl.j2dev.j2bills.pojo.Users;
 
+@Component
 public class UserRowMapper implements RowMapper<Users> {
 
 	@Override
