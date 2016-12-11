@@ -1,19 +1,17 @@
 package pl.j2dev.j2bills.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
 import pl.j2dev.j2bills.pojo.Users;
 import pl.j2dev.j2bills.pojo.mappers.UserRowMapper;
 
+@Repository
 public class UsersDaoImpl extends DaoAbstractImpl<Users> {
 	
 	@Override
-	@Deprecated
 	//"For USERS use this method with String parameter"
 	public Users getOjectById(int id) {
 		return null;

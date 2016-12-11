@@ -1,55 +1,40 @@
 package pl.j2dev.j2bills.dao.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
+import pl.j2dev.j2bills.pojo.Account;
 import pl.j2dev.j2bills.pojo.Currency;
+import pl.j2dev.j2bills.pojo.mappers.CurrencyRowMapper;
 
 
 @Repository
 public class CurrencyDaoImpl extends DaoAbstractImpl<Currency> {
 
-	public CurrencyDaoImpl(SessionFactory sessionFactory) {
-		super(sessionFactory);
-	}
-
+	@Autowired
+	CurrencyRowMapper mapper;
+	
 	@Override
 	public Currency getOjectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "SELECT * FROM currency where id = ?";
+		Currency currency = jdbc.queryForObject(sql, mapper, id);
+		return currency;
 	}
 
-	@Override
-	public Currency getObjectByKey(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Currency> getOjects() {
-		@SuppressWarnings("unchecked")
-	
-		List<Currency> list = currentSession().createCriteria(Currency.class)
-			.add( Restrictions.eq("active", true))
-			.list();
-		
+		final String sql = "SELECT * FROM currency";
+		List<Currency> list = jdbc.query(sql, mapper);
 		return list;
 	}
 
 	@Override
 	public int save(Currency object) {
-		System.out.println("try to save account " + object);
-
-		object.setActive(true);
-		
-		Serializable id = currentSession().save(object);
-		
-		return (int) id;
+		return (int) 0;
 	}
 
 	@Override
@@ -57,7 +42,5 @@ public class CurrencyDaoImpl extends DaoAbstractImpl<Currency> {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	
 	
 }

@@ -3,32 +3,24 @@ package pl.j2dev.j2bills.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
-import pl.j2dev.j2bills.pojo.Account;
 import pl.j2dev.j2bills.pojo.Journal;
+import pl.j2dev.j2bills.pojo.mappers.JournalRowMapper;
 
 @Repository
 public class JournalDaoImpl extends DaoAbstractImpl<Journal> {
 
-	public JournalDaoImpl(SessionFactory sessionFactory) {
-		super(sessionFactory);
-		// TODO Auto-generated constructor stub
-	}
-
+	@Autowired
+	JournalRowMapper mapper;
+	
 	@Override
 	public Journal getOjectById(int id) {
-		return (Journal) currentSession().load(Journal.class, id);
-	}
-
-	@Override
-	public Journal getObjectByKey(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "SELECT * FROM journal WHERE id = ?";
+		Journal journal = jdbc.queryForObject(sql, mapper, id);
+		return journal;
 	}
 
 	@Override
@@ -36,14 +28,9 @@ public class JournalDaoImpl extends DaoAbstractImpl<Journal> {
 		String user = username();
 		if (user == null)
 			return new ArrayList<Journal>();
-		
-		Criteria criterion = currentSession().createCriteria(Journal.class);
-		criterion.add(Restrictions.eq("users.username", user));
-		
-		@SuppressWarnings("unchecked")
-		List<Journal> list = criterion.list();
-		
-		return list;
+		final String sql = "SELECT * FROM journal WHERE username = ?";
+		List<Journal> query = jdbc.query(sql, mapper, username());
+		return query;
 	}
 
 	@Override

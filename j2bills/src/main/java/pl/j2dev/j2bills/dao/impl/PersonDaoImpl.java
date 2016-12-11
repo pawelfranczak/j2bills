@@ -1,36 +1,28 @@
 package pl.j2dev.j2bills.dao.impl;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
 import pl.j2dev.j2bills.pojo.Account;
 import pl.j2dev.j2bills.pojo.Person;
 import pl.j2dev.j2bills.pojo.Users;
+import pl.j2dev.j2bills.pojo.mappers.PersonRowMapper;
 
 @Repository
 public class PersonDaoImpl extends DaoAbstractImpl<Person> {
 
-	public PersonDaoImpl(SessionFactory sessionFactory) {
-		super(sessionFactory);
-	}
-
+	@Autowired
+	PersonRowMapper mapper;
+	
 	@Override
 	public Person getOjectById(int id) {
-		return (Person) currentSession().load(Person.class, id);
-	}
-
-	@Override
-	public Person getObjectByKey(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "SELECT * FROM person where id = ?";
+		Person person = jdbc.queryForObject(sql, mapper, id);
+		return person;
 	}
 
 	@Override
@@ -38,12 +30,9 @@ public class PersonDaoImpl extends DaoAbstractImpl<Person> {
 		String user = username();
 		if (user == null)
 			return new ArrayList<Person>();
-		
-		Criteria criterion = currentSession().createCriteria(Person.class);
-		criterion.add(Restrictions.eq("users.username", user));
-		
-		@SuppressWarnings("unchecked")
-		List<Person> list = criterion.list();
+
+		final String sql = "SELECT * FROM person WHERE username = ?";
+		List<Person> list = jdbc.query(sql, mapper, user);
 		
 		return list;
 	}
@@ -54,10 +43,7 @@ public class PersonDaoImpl extends DaoAbstractImpl<Person> {
 		if (user == null)
 			return 0;
 		
-		object.setUsers( user );
-		
-		Serializable id = currentSession().save(object);
-		return (int) id;
+		return (int) 0;
 	}
 
 	@Override
