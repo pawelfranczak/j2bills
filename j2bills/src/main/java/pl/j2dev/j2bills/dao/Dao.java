@@ -2,7 +2,6 @@ package pl.j2dev.j2bills.dao;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 

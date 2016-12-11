@@ -3,6 +3,7 @@ package pl.j2dev.j2bills.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,6 +15,9 @@ public abstract class DaoAbstractImpl<T> implements Dao<T> {
 
 	@Autowired
 	public JdbcOperations jdbc;
+	
+	@Autowired 
+	protected ApplicationContext context;
 	
 	@Override
 	public abstract T getOjectById(int id);
