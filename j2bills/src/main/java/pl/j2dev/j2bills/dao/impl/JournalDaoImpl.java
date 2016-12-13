@@ -1,9 +1,15 @@
 package pl.j2dev.j2bills.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import pl.j2dev.j2bills.dao.DaoAbstractImpl;
@@ -35,8 +41,38 @@ public class JournalDaoImpl extends DaoAbstractImpl<Journal> {
 
 	@Override
 	public int save(Journal object) {
-		// TODO Auto-generated method stub
-		return 0;
+		String user = username();
+		if (user == null)
+			return 0;
+		
+		final String sql = "INSERT INTO journal(username, person_id, account_id, currency_id, value, decription, timestamp) " + 
+		"values (?, ?, ?, ?, ?, ?, ?)";
+		
+		KeyHolder key = new GeneratedKeyHolder();
+		
+		jdbc.update(
+		
+				new PreparedStatementCreator() {
+					
+					@Override
+					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+						PreparedStatement ps = con.prepareStatement(sql);
+						ps.setString(1, user);
+						ps.setInt(2, object.getPerson().getId());
+						ps.setInt(3, object.getAccount().getId());
+						ps.setInt(4, object.getCurrency().getId());
+						ps.setBigDecimal(5, object.getValue());
+						ps.setString(6, object.getDescription());
+						ps.setTimestamp(7, new java.sql.Timestamp(new java.util.Date().getTime()));
+						return null;
+					}
+				}, key
+				
+		);
+		
+		System.out.println("Dodany wpis do dziennika ma id " + key.getKey().intValue());
+		
+		return key.getKey().intValue();
 	}
 
 	@Override
