@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.j2dev.j2bills.dao.Dao;
+import pl.j2dev.j2bills.pojo.Journal;
 
 public abstract class DefaultController<T> {
 
@@ -31,21 +32,13 @@ public abstract class DefaultController<T> {
 		return "redirect:/" + getPojoName().toLowerCase() + "/added/" + id;
 	}
 	
-	@RequestMapping(value = "/added/{id}", method = RequestMethod.GET)
-	public String addedObjectToDatabase(Model model, @PathVariable int id) {
-		T object = dao.getOjectById(id);
-		if (object != null)
-			model.addAttribute(object);
-		return getPojoName().toLowerCase() + "/added";
-	}
-	
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public String show(Model model) {
 		model.addAttribute(dao.getOjects());
 		return getPojoName().toLowerCase() + "/show";
 	}
 	
-	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = {"/show/{id}", "added/{id}"}, method = RequestMethod.GET)
 	public String showOne(@PathVariable int id, Model model) {
 		T object = dao.getOjectById(id);
 		List<T> list = new ArrayList<T>();
