@@ -36,23 +36,19 @@
 	
 	<fmt:message key="account" />: 
 	<a href="<c:url value="account/addForm" />"> <fmt:message key="index.add" /> </a> |
-	<a href="<c:url value="account/show" />"> <fmt:message key="index.show" /> </a> |
-	<a href="<c:url value="account/select" />"> <fmt:message key="index.select" /> </a><BR>
+	<a href="<c:url value="account/show" />"> <fmt:message key="index.show" /> </a><BR>
 	
 	<fmt:message key="currency" />: 
 	<a href="<c:url value="currency/addForm" />"> <fmt:message key="index.add" /> </a> |
-	<a href="<c:url value="currency/show" />"> <fmt:message key="index.show" /> </a> |
-	<a href="<c:url value="currency/select" />"> <fmt:message key="index.select" /> </a> | <BR>
+	<a href="<c:url value="currency/show" />"> <fmt:message key="index.show" /> </a><BR>
 	
 	<fmt:message key="person" />: 
 	<a href="<c:url value="person/addForm" />"> <fmt:message key="index.add" /> </a> |
-	<a href="<c:url value="person/show" />"> <fmt:message key="index.show" /> </a> |
-	<a href="<c:url value="person/select" />"> <fmt:message key="index.select" /> </a> | <BR>
+	<a href="<c:url value="person/show" />"> <fmt:message key="index.show" /> </a><BR>
 
 	<fmt:message key="journal.entry" />: 
-	<a href="<c:url value="journal/addFormExtended" />"> <fmt:message key="index.add" /> </a> |
-	<a href="<c:url value="journal/show" />"> <fmt:message key="index.show" /> </a> |
-	<a href="<c:url value="journal/select" />"> <fmt:message key="index.select" /> </a> | <BR>
+	<a href="<c:url value="journal/addForm" />"> <fmt:message key="index.add" /> </a> |
+	<a href="<c:url value="journal/show" />"> <fmt:message key="index.show" /> </a><BR>
 
 </body>
 </html>
